@@ -23,7 +23,12 @@ async function run(){
 
         //get task api
         app.get('/addtask',async(req,res)=>{
-           const query = {} //for get all data
+            let query = {} //for get all data
+                if(req.query.email){
+                    query = {
+                        email: req.query.email
+                    }
+                }
            const cursor = addtaskCollection.find(query);
            const tasks = await cursor.toArray();
             res.send(tasks);
